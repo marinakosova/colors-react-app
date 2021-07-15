@@ -22,7 +22,7 @@ function generatePalette(starterPalette) {
                 rgb: chroma(scale[i]).css(),
                 rgba: chroma(scale[i])
                     .css()
-                    .replace("rgba", "rgba")
+                    .replace("rgb", "rgba")
                     .replace(")", ",1.0)")
             });
         }
@@ -34,8 +34,8 @@ function getRange(hexColor) {
     const end = "#fff";
     return [
         chroma(hexColor)
-            .darken(1.4)
-            .hex(),
+        .darken(1.4)
+        .hex(),
         hexColor,
         end
     ];
