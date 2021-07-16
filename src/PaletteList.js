@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/styles';
 
 const styles = {
     root: {
-        height: "100%",
+        height: "100vh",
         backgroundColor: "blue",
         display: "flex",
         alignItems: "flex-start",
