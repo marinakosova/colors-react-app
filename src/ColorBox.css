@@ -13,9 +13,10 @@
     height: 50%;
 } */
 
-.ColorBox.go-back {
+
+/* .ColorBox.go-back {
     background-color: black;
-}
+} */
 
 
 /* .ColorBox:hover .copy-button {
@@ -23,7 +24,8 @@
     transition: 0.5s;
 } */
 
-.copy-button,
+
+/* .copy-button,
 .back-button {
     width: 100px;
     height: 30px;
@@ -43,6 +45,7 @@
     border: none;
     text-decoration: none;
 }
+ */
 
 
 /* .copy-button {
