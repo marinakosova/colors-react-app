@@ -11,10 +11,11 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { ChromePicker } from 'react-color';
 import styles from "./styles/NewPaletteFormStyles";
+import { Button } from '@material-ui/core';
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -121,11 +122,25 @@ function NewPaletteForm() {
             >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        {<ChevronLeftIcon />}
                     </IconButton>
                 </div>
                 <Divider />
-                <Divider />
+                <Typography variant="h4">
+                    Design Your Palette
+                </Typography>
+                <div>
+                    <Button variant="contained" color="secondary">
+                        Clear Palette
+                </Button>
+                    <Button variant="contained" color="primary">
+                        Random Color
+                </Button>
+                </div>
+                <ChromePicker color="olive" onChangeComplete={(newColor) => console.log(newColor)} />
+                <Button variant="contained" color="primary">
+                    Add Color
+                </Button>
             </Drawer>
             <main
                 className={clsx(classes.content, {
@@ -133,11 +148,6 @@ function NewPaletteForm() {
                 })}
             >
                 <div className={classes.drawerHeader} />
-                <Typography paragraph>
-                </Typography>
-                <Typography paragraph>
-
-                </Typography>
             </main>
         </div>
     );
