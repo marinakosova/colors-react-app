@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from "react";
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -74,10 +74,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function NewPaletteForm() {
+function NewPaletteForm(props) {
+    //console.log(props);
     const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [currentColor, setCurrentColor] = useState("teal");
+    const [colors, setColor] = useState(["purple", "red"]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -85,6 +87,14 @@ function NewPaletteForm() {
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+
+    const updateCurrentColor = (newColor) => {
+        setCurrentColor(newColor.hex);
+    };
+
+    const addNewColor = () => {
+        setColor([...colors, currentColor]);
     };
 
     return (
@@ -137,8 +147,14 @@ function NewPaletteForm() {
                         Random Color
                 </Button>
                 </div>
-                <ChromePicker color="olive" onChangeComplete={(newColor) => console.log(newColor)} />
-                <Button variant="contained" color="primary">
+                <ChromePicker
+                    color={currentColor}
+                    onChangeComplete={updateCurrentColor} />
+                <Button variant="contained"
+                    color="primary"
+                    style={{ backgroundColor: currentColor }}
+                    onClick={addNewColor}
+                >
                     Add Color
                 </Button>
             </Drawer>
@@ -148,9 +164,87 @@ function NewPaletteForm() {
                 })}
             >
                 <div className={classes.drawerHeader} />
+                <ul>
+                    {colors.map(color => (
+                        <li>{color}</li>
+                    ))}
+                </ul>
             </main>
         </div>
     );
 }
+
+// class NewPaletteForm extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             open: true,
+//             currentColor: "teal"
+//         };
+//     }
+
+//     handleDrawerOpen = () => {
+//         this.setState({ open: true });
+//     };
+
+//     handleDrawerClose = () => {
+//         this.setState({ open: false });
+//     };
+
+//     render() {
+//         const { classes } = this.props;
+//         const { open } = this.state;
+
+//         return (
+//             <div className={classes.root}>
+//                 <Drawer
+//                     className={classes.drawer}
+//                     variant='persistent'
+//                     anchor='left'
+//                     open={open}
+//                     classes={{
+//                         paper: classes.drawerPaper
+//                     }}
+//                 >
+//                     <div className={classes.drawerHeader}>
+//                         <IconButton onClick={this.handleDrawerClose}>
+//                             <ChevronLeftIcon />
+//                         </IconButton>
+//                     </div>
+//                     <Divider />
+//                     <div className={classes.container}>
+//                         <Typography variant='h4' gutterBottom>
+//                             Design Your Palette
+//                 </Typography>
+//                         <div className={classes.buttons}>
+//                             <Button
+//                                 variant='contained'
+//                                 color='secondary'
+//                             >
+//                                 Clear Palette
+//                   </Button>
+//                             <Button
+//                                 variant='contained'
+//                                 color='primary'
+//                             >
+//                                 Random Color
+//                   </Button>
+//                         </div>
+//                         <ChromePicker
+//                             colors={this.state.currentColor}
+//                         />
+//                     </div>
+//                 </Drawer>
+//                 <main
+//                     className={classNames(classes.content, {
+//                         [classes.contentShift]: open
+//                     })}
+//                 >
+//                     <div className={classes.drawerHeader} />
+//                 </main>
+//             </div>
+//         );
+//     }
+// }
 
 export default withStyles(styles, { withTheme: true })(NewPaletteForm);
