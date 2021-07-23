@@ -14,6 +14,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import styles from "./styles/NewPaletteFormStyles";
 import { Button } from '@material-ui/core';
+import DraggableColorBox from './DraggableColorBox';
 
 const drawerWidth = 400;
 
@@ -58,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
+        height: "calc(100vh - 64px)",
         padding: theme.spacing(3),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
@@ -74,8 +76,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function NewPaletteForm(props) {
-    //console.log(props);
+function NewPaletteForm() {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [currentColor, setCurrentColor] = useState("teal");
@@ -166,85 +167,12 @@ function NewPaletteForm(props) {
                 <div className={classes.drawerHeader} />
                 <ul>
                     {colors.map(color => (
-                        <li>{color}</li>
+                        <DraggableColorBox color={color} />
                     ))}
                 </ul>
             </main>
         </div>
     );
 }
-
-// class NewPaletteForm extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             open: true,
-//             currentColor: "teal"
-//         };
-//     }
-
-//     handleDrawerOpen = () => {
-//         this.setState({ open: true });
-//     };
-
-//     handleDrawerClose = () => {
-//         this.setState({ open: false });
-//     };
-
-//     render() {
-//         const { classes } = this.props;
-//         const { open } = this.state;
-
-//         return (
-//             <div className={classes.root}>
-//                 <Drawer
-//                     className={classes.drawer}
-//                     variant='persistent'
-//                     anchor='left'
-//                     open={open}
-//                     classes={{
-//                         paper: classes.drawerPaper
-//                     }}
-//                 >
-//                     <div className={classes.drawerHeader}>
-//                         <IconButton onClick={this.handleDrawerClose}>
-//                             <ChevronLeftIcon />
-//                         </IconButton>
-//                     </div>
-//                     <Divider />
-//                     <div className={classes.container}>
-//                         <Typography variant='h4' gutterBottom>
-//                             Design Your Palette
-//                 </Typography>
-//                         <div className={classes.buttons}>
-//                             <Button
-//                                 variant='contained'
-//                                 color='secondary'
-//                             >
-//                                 Clear Palette
-//                   </Button>
-//                             <Button
-//                                 variant='contained'
-//                                 color='primary'
-//                             >
-//                                 Random Color
-//                   </Button>
-//                         </div>
-//                         <ChromePicker
-//                             colors={this.state.currentColor}
-//                         />
-//                     </div>
-//                 </Drawer>
-//                 <main
-//                     className={classNames(classes.content, {
-//                         [classes.contentShift]: open
-//                     })}
-//                 >
-//                     <div className={classes.drawerHeader} />
-//                 </main>
-//             </div>
-//         );
-//     }
-// }
 
 export default withStyles(styles, { withTheme: true })(NewPaletteForm);
