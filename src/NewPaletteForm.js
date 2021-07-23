@@ -15,6 +15,7 @@ import { ChromePicker } from 'react-color';
 import styles from "./styles/NewPaletteFormStyles";
 import { Button } from '@material-ui/core';
 import DraggableColorBox from './DraggableColorBox';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 const drawerWidth = 400;
 
