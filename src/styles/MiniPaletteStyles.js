@@ -1,4 +1,4 @@
-export default {
+const miniPaletteStyles = {
     root: {
         backgroundColor: "white",
         borderRadius: "5px",
@@ -39,3 +39,5 @@ export default {
         marginBottom: "-3.5px"
     }
 }
+
+export default miniPaletteStyles;
